@@ -760,6 +760,23 @@ function drawCurve(ctx, x, y, scale, ptsa, isClosed, numOfSegments, color, linew
 // ptsa           flat float array of points
 // numOfSegments  how many subdivisions in between each point
 // alpha          0==uniform (std catmull rom), 0.5==centripetal, 1.0==chordal
+//
+// FAQ: Catmull-Rom vs Hermite
+// - Hermite curve: defined by two endpoints and tangents at those endpoints.
+// - Catmull-Rom spline: a type of Hermite curve, but the tangents are automatically computed from the neighboring points.
+//   This makes Catmull-Rom splines easier to use when you have a series of points and want a smooth curve through them.
+// - How's the math work?
+//   For a segment between P1 and P2, Catmull-Rom sets the tangent as:
+//   T1 = (P2 - P0) / 2
+//   T2 = (P3 - P1) / 2
+//   (or a variant depending on the parameterization (uniform, centripetal, chordal))
+//   where P0 and P3 are the previous and next points, respectively.
+//   This automatic tangent calculation is what differentiates Catmull-Rom from a general Hermite curve.
+// - Why the mirroring at the endpoints?
+//   This is a common trick for Catmull-Rom splines
+//   CatmullRom splines require the previous and next points to calculate tangents, so mirroring helps maintain smoothness at the ends.
+//   Mirror the P[1] relative to P[0] to simulate P(-1) to make the spline pass smoothly through the first P[0].
+//   Mirror the P[n-2] relative to P[n-1] to simulate P[n] to make the spline pass smoothly through the last P[n-1].
 function getCurvePoints(ptsa, numOfSegments, alpha=0.5 /*centripetal*/) {
    numOfSegments = numOfSegments ? numOfSegments : 16;
    //console.log( " numOfSegments:" + numOfSegments  );
@@ -768,8 +785,6 @@ function getCurvePoints(ptsa, numOfSegments, alpha=0.5 /*centripetal*/) {
    let second = [ptsa[2], ptsa[3]];
    let last = [ptsa[ptsa.length-2], ptsa[ptsa.length-1]];
    let second_to_last = [ptsa[ptsa.length-4], ptsa[ptsa.length-3]];
-
-   [100,0], [101,0]
 
    //copy 1. mirror the 2nd point at beginning and end
    let points = [];

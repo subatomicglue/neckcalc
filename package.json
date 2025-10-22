@@ -1,0 +1,16 @@
+{
+  "name": "neckcalc",
+  "version": "1.0.0",
+  "license": "subatomiclabs (c) 2016-Present",
+  "angular-cli": {},
+  "scripts": {
+    "start": "http-server src",
+    "clobber": "rm -rf node_modules",
+    "checkinstall": "bash -c \"[[ ! -d 'node_modules' ]] && npm install\"; exit 0"
+  },
+  "private": false,
+  "devDependencies": {
+    "aws-sdk": "^2.434.0",
+    "http-server": "^14.1.1"
+  }
+}

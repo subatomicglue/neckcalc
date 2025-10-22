@@ -10,8 +10,8 @@ Features:
 - Neck Shape  (**work in progress**)
 - Neck Depth
 - Neck Width
-- export PNG, JPG, BMP
-- export DXF  (**work in progress**)
+- export PNG, JPG, BMP  (bitmaps)
+- export DXF, SVG       (vector shapes)
 
 # How To Run
 
@@ -19,8 +19,8 @@ Features:
 
 or
 
-- Start a server on <http://localhost:8000/>   (uses `python`)
-  - `./startHTTP.sh`
+- Start a server on <http://localhost:8000/>   (`startHTTP` uses `python`)
+  - `./startHTTP.sh` or `npm start`
   - open `http://localhost:8000/` in your web browser
 
 
@@ -31,12 +31,11 @@ or
 - Install dependencies   (uses nodejs `npm`)
   - `npm install`
 
-- Start a server on <http://localhost:8000/>   (uses `python`)
-  - `npm start`
+- Start a server on <http://localhost:8000/>   (`startHTTP` uses `python`)
+  - `./startHTTP.sh` or `npm start`
 
 # Future Work
-- TODO: All shapes are **eyeballed from my own memory**.  Need to trace in some actual neck profile shapes when i get some time in front of inkscape (see `drawCshape()` functions, and friends)
-- TODO: DXF exporter is unfinished... currently you'll need to trace your vectors over the exported Image...
+- TODO: All shapes are **eyeballed**.  Need to trace in some actual neck profile shapes when i get some time in front of inkscape (see `drawCshape()` functions, and friends)
 - TODO: Currently `Depth` is measured from the bottom of the fretboard curve.  But perhaps it should be measured from the top of the fretboard rounded surface??  I could put this on an option toggle if both are valid.
 
 
